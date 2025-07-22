@@ -281,7 +281,8 @@ au beurre salé..........
 .138
 aigre-doux..........
 .256
-Pâte à tartiner aux deux chocolats........... ..366
+Pâte à tartiner aux deux chocolats...........
+..366
 .338
 Velouté d'avocats et salsa de tomates..........228
 Gâteau de semoule rhum et raisins.
@@ -319,6 +320,7 @@ Tofu et champignons à la chinoise
 Fondue de poireaux au chorizo
 ..198
 Velouté d'avocats et salsa de tomates............228
+Eufs brouillés chorizo et tomates cerises...136
 Riz pilaf aux épinards et aux fruits secs..........282
 et courgettes...........
 .43
@@ -338,7 +340,6 @@ Boulgour façon paella......
 ...300
 curry-coco et riz.........
 23
-Eufs brouillés chorizo et tomates cerises...136
 Papillotes de cabillaud au chorizo.................80
 Sauté de dinde aux poivrons et chorizo..........28
 Chou

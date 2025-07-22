@@ -166,6 +166,7 @@ def parse(filein=None):
         print("-" * 40)  # Separator for readability
 
     print(f"Total ingredients found: {len(parsed_data)}")
+    print(recette_sans_page)
 
 
 if __name__ == "__main__":
