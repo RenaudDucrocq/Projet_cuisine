@@ -9,4 +9,4 @@ ENV/
 *.iml
 
 # Fichiers de cache Python
-__pycache__/
+*/__pycache__/
