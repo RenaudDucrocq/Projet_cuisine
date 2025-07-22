@@ -1,3 +1,5 @@
 PyQt6~=6.9.1
 protobuf~=6.31.1
 pillow~=11.2.1
+pytest==8.4.1
+pytest-mock
