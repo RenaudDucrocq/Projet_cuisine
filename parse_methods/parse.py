@@ -103,26 +103,43 @@ def parse_recettes_data(text_content, structured_data: dict) -> (dict, dict, dic
                         recipe['recipe'] == recipe_name for recipe in structured_data[ingredient]):
                     structured_data[ingredient].append({'recipe': recipe_name, 'page': page_number})
 
+                    # On supprime la recette des recettes sans page si elle y est présente.
+                    if recipe_name in recette_sans_page:
+                        del recette_sans_page[recipe_name]
+
+                    # On supprime la page des pages sans recette si elle y est présente.
+                    if page_number in page_sans_recette:
+                        del page_sans_recette[page_number]
+
         # On vérifie si la ligne contient un nom de recette et des points, mais pas de numéro de page.
         # Exemple: "Soupe de légumes..............", "Mijoté de thon et légumes".
         elif recipe_name_pattern.match(line):
             recipe_name_match = recipe_name_pattern.match(line).group('recipe').strip()
+
+            # On compte le nombre de répétitions de la recette sans numéro de page.
+            nb_repetition = recette_sans_page.get(recipe_name_match, 0) + 1
+
             # On vérifie si le nom de la recette est déjà présente dans la liste des recettes pour chaque ingrédient.
-            for ingredient in structured_data.keys():
-                if ingredient.lower() in recipe_name_match.lower() and not any(
-                        recipe['recipe'] == recipe_name_match for recipe in structured_data[ingredient]):
-                    # On ajoute la recette sans numéro de page.
-                    recette_sans_page[recipe_name_match] = recette_sans_page.get(recipe_name_match, 0) + 1
+            for _, recettes_structured in structured_data.items():
+                if not any(
+                        recipe['recipe'] == recipe_name_match for recipe in recettes_structured):
+                    # Si la recette n'est pas déjà présente, on l'ajoute à la liste des recettes sans page.
+                    recette_sans_page[recipe_name_match] = nb_repetition
+
 
         # On vérifie si la ligne contient un numéro de page sans nom de recette.
-        #Exemple: "30", ".45", "..100".
+        # Exemple: "30", ".45", "..100".
         elif page_number_pattern.match(line):
             page_number_match = page_number_pattern.match(line).group('page').strip()
-            # On ajoute la page à la liste qui n'a pas de recette associée mais contient tous les numéros de page.
-            for ingredient in structured_data.keys():
-                if not any(recipe['page'] == page_number_match for recipe in structured_data[ingredient]):
-                    # On ajoute la page sans recette associée.
-                    page_sans_recette[page_number_match] = page_sans_recette.get(page_number_match, 0) + 1
+
+            # On compte le nombre de répétitions de la page sans recette associée.
+            nb_repetition = page_sans_recette.get(page_number_match, 0) + 1
+
+            # On vérifie si la page est déjà présente dans la liste des recettes pour chaque ingrédient.
+            for _, recettes_structured in structured_data.items():
+                if not any(recipe['page'] == page_number_match for recipe in recettes_structured):
+                    # Si la page n'est pas déjà présente, on l'ajoute à la liste des pages sans recette.
+                    page_sans_recette[page_number_match] = nb_repetition
 
     # appel de la GUI pour afficher les ingrédients et mettre a jour la liste.
     interface = INTERFACE_RECETTE(structured_data)
