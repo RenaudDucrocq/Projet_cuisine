@@ -1,0 +1,9 @@
+# Environnement virtuel
+venv/
+env/
+ENV/
+.venv/
+
+# Fichiers générés par l’IDE PyCharm
+.idea/
+*.iml
