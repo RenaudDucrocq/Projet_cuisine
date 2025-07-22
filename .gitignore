@@ -7,3 +7,6 @@ ENV/
 # Fichiers générés par l’IDE PyCharm
 .idea/
 *.iml
+
+# Fichiers de cache Python
+__pycache__/
